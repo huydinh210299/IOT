@@ -1,0 +1,19 @@
+{
+  "name": "save_db_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.10.11",
+    "mqtt": "^4.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
