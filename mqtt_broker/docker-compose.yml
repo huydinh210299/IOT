@@ -1,0 +1,17 @@
+version: '2'
+services:
+    mqtt:
+        image: eclipse-mosquitto
+        restart: always
+        network_mode: host
+        ports:
+            - '1883:1883'
+            - '9001:9001'
+
+    rabbitmq:
+        image: rabbitmq:3
+        restart: always
+        network_mode: host
+        ports:
+            - 5672:5672
+            - 15672:1567
