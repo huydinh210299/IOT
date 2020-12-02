@@ -16,21 +16,21 @@ const Home = lazy(() => import('./HomeRoute'));
 // const Test = lazy( () => import("components/Test"));
 
 function MainAppRoute(props) {
-    return (
-        <LayoutMenu>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Switch>
-                    <PrivateRoute component={Home} exact path='/' />
-                    {/* <PrivateRoute component={Rooms} path="/rooms" />
+  return (
+    <LayoutMenu>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <PrivateRoute component={Home} exact path="/" />
+          {/* <PrivateRoute component={Rooms} path="/rooms" />
           <PrivateRoute component={Deveices} path="/deveices" />
           <PrivateRoute component={Profile} path="/profile" />
           <PrivateRoute component={Test} path="/test" /> */}
 
-                    {/* <Route component={ErrorNotFound} path="*" /> */}
-                </Switch>
-            </Suspense>
-        </LayoutMenu>
-    );
+          {/* <Route component={ErrorNotFound} path="*" /> */}
+        </Switch>
+      </Suspense>
+    </LayoutMenu>
+  );
 }
 
 export default MainAppRoute;

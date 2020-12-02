@@ -10,14 +10,14 @@ import Login from './components/Login/Login';
 import MainAppRoutes from './routers/MainAppRoute';
 
 function App() {
-    return (
-        <Router>
-            <Switch>
-                <Route component={Login} path='/login' />
-                <PrivateRoute component={MainAppRoutes} path='*' exact />
-            </Switch>
-        </Router>
-    );
+  return (
+    <Router>
+      <Switch>
+        <Route component={Login} path="/login" />
+        <PrivateRoute component={MainAppRoutes} path="*" exact />
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;

@@ -19,6 +19,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "beauty": "prettier --single-quote --trailing-comma all --tab-width 2 --write src/**/*.{js,json,scss}",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -41,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }

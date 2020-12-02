@@ -8,19 +8,51 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './redux/reducers/index';
+//import appReducer from './redux/reducers/index';
 import thunk from 'redux-thunk';
 
+// var startState = {};
+// if (
+//     localStorage.getItem("token") !== null &&
+//     localStorage.getItem("token") !== "null"
+// ) {
+//     startState = {
+//         auth: {
+//             token: localStorage.getItem("token"),
+//             isAuthenticated: true,
+//         },
+//     };
+// } else {
+//     startState = {
+//         auth: {
+//             token: null,
+//             isAuthenticated: false,
+//         },
+//     };
+// }
+
+// const rootReducer = (state, action) => {
+//     if (action.type === 'LOGOUT_SUCCESS') {
+//       state = undefined;
+//     }
+
+//     return appReducer(state, action);
+//   };
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+// store.subscribe(() => {
+//     localStorage.setItem("token", store.getState().authReducer.token);
+// });
+
 ReactDOM.render(
-    <Provider store={store}>
-        <Suspense fallback={<div>Loading...</div>}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </Suspense>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <Suspense fallback={<div>Loading...</div>}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Suspense>
+  </Provider>,
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
