@@ -3,7 +3,7 @@ const router = express.Router();
 const Sensor = require('../models/Sensor');
 const moment = require('moment');
 
-router.post('/getone', async (req, res) => {
+router.post('/getdata', async (req, res) => {
     try {
         //request body
         const begin_month = req.body.begin_month;
