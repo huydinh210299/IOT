@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './LayoutMenu.css';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/images/fashionpng.svg';
-
 import { Layout, Menu, Breadcrumb, Avatar, Dropdown, Button } from 'antd';
 import {
   DesktopOutlined,
@@ -13,6 +12,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { IconMap } from 'antd/lib/result';
+import { Link } from 'react-router-dom';
+import { logoutAction } from '../../redux/actions/authAction';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -26,35 +27,11 @@ function LayoutMenu(props) {
     setCollapsed(collapsed);
   };
 
+  const dispatch = useDispatch();
+
   const menu = (
     <Menu>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.alipay.com/"
-        >
-          1st menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.taobao.com/"
-        >
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.tmall.com/"
-        >
-          3rd menu item
-        </a>
-      </Menu.Item>
+      <Menu.Item onClick={() => dispatch(logoutAction())}>Log out</Menu.Item>
     </Menu>
   );
 
@@ -70,10 +47,10 @@ function LayoutMenu(props) {
         </div>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
           <Menu.Item key="1" icon={<PieChartOutlined />}>
-            Option 1
+            <Link to="/home">Home</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<DesktopOutlined />}>
-            Option 2
+            <Link to="/statistic">Statistic</Link>
           </Menu.Item>
           <SubMenu key="sub1" icon={<UserOutlined />} title="User">
             <Menu.Item key="3">Tom</Menu.Item>
@@ -98,21 +75,15 @@ function LayoutMenu(props) {
           </div>
         </Header>
         <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb style={{ margin: '16px 0' }}></Breadcrumb>
           <div
             className="site-layout-background"
             style={{ padding: 24, minHeight: 360, height: '100%' }}
           >
-            Bill is a cat.
             {children}
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Project III - Fashion Store
-        </Footer>
+        <Footer style={{ textAlign: 'center' }}>IOT</Footer>
       </Layout>
     </Layout>
   );
