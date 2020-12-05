@@ -1,6 +1,9 @@
 // api/axiosClient.js
 import axios from 'axios';
 import queryString from 'query-string';
+import { notification } from 'antd';
+import { notifFailure } from '../components/Shared/Notification';
+
 // Set up default config for http requests here
 
 // Please have a look at here `https://github.com/axios/axios#request-
@@ -14,7 +17,10 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(async (config) => {
-  // Handle token here ...
+  config.headers = {
+    ...config.headers,
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  };
   return config;
 });
 
@@ -26,7 +32,7 @@ axiosClient.interceptors.response.use(
     return response;
   },
   (error) => {
-    // Handle errors
+    notifFailure(error);
     throw error;
   },
 );

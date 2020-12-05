@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon --inspect server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,7 @@
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.10"
+    "mongoose": "^5.11.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
