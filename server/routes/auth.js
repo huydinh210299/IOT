@@ -3,6 +3,7 @@ const User = require('../models/User');
 const { registerValidation, loginValidation } = require('../validations/auth');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const auth = require('../middlewares/auth');
 
 //Register
 router.post('/register', async (req, res) => {
@@ -18,6 +19,7 @@ router.post('/register', async (req, res) => {
 
 	//Hash password
 	const salt = await bcrypt.genSalt(10);
+
 	const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
 	//Create a new user
@@ -37,6 +39,7 @@ router.post('/register', async (req, res) => {
 
 //Login
 router.post('/login', async (req, res) => {
+	debugger
 	//Validate schema
 	const { error } = loginValidation(req.body);
 	if (error)
@@ -57,6 +60,14 @@ router.post('/login', async (req, res) => {
 		process.env.TOKEN_SECRET
 	);
 	res.json({ accessToken: token });
+});
+
+router.post('/', auth("admin"), async (req, res) => {
+	try {
+		res.status(200).json({});
+	} catch (error) {
+		res.status(402);
+	}
 });
 
 module.exports = router;

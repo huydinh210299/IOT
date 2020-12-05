@@ -20,7 +20,7 @@ function MainAppRoute(props) {
     <LayoutMenu>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <PrivateRoute component={Home} exact path="/" />
+          <PrivateRoute component={Home} exact path="/home" />
           {/* <PrivateRoute component={Rooms} path="/rooms" />
           <PrivateRoute component={Deveices} path="/deveices" />
           <PrivateRoute component={Profile} path="/profile" />

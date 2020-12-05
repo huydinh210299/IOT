@@ -4,7 +4,7 @@ module.exports = (credentials = []) => {
 	return (req, res, next) => {
 		//Allow for a string or array
 		if (typeof credentials === 'string') credentials = [credentials];
-
+		debugger
 		const token = req.headers.authorization;
 		if (!token) return res.status(401).json({ message: 'Access Denied' });
 
