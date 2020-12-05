@@ -16,34 +16,33 @@ import { Spin } from 'antd';
 function App() {
   const dispatch = useDispatch();
 
-  const { isAuthenticating } = useSelector(state => state.authReducer);
+  const { isAuthenticating } = useSelector((state) => state.authReducer);
   useEffect(() => {
-    // console.log("1");
-    // const token = localStorage.getItem("token");
-    // if (!!token) {
-    //   dispatch(authAction());
-    // }
-  });
+    console.log('1');
+    const token = localStorage.getItem('token');
+    if (!!token) {
+      dispatch(authAction());
+    }
+  }, []);
   return (
     <div style={{ height: '100%' }}>
-      {isAuthenticating ?
-        (<Spin size="large" spinning={isAuthenticating}>
+      {isAuthenticating ? (
+        <Spin size="large" spinning={isAuthenticating}>
           <Router>
             <Switch>
               <Route component={Login} path="/login" />
               <PrivateRoute component={MainAppRoutes} path="*" exact />
             </Switch>
           </Router>
-        </Spin>)
-        :
-        (
-          <Router>
-            <Switch>
-              <Route component={Login} path="/login" />
-              <PrivateRoute component={MainAppRoutes} path="*" exact />
-            </Switch>
-          </Router>
-        )}
+        </Spin>
+      ) : (
+        <Router>
+          <Switch>
+            <Route component={Login} path="/login" />
+            <PrivateRoute component={MainAppRoutes} path="*" exact />
+          </Switch>
+        </Router>
+      )}
     </div>
   );
 }

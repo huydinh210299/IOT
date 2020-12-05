@@ -40,11 +40,14 @@ const loginFailure = (err) => ({
 
 export const registerAction = (data) => {
   return async (dispatch) => {
-    data = { ...data, role: "admin" };
+    data = { ...data, role: 'admin' };
     dispatch(registerRequesting());
     try {
       const response = await axiosClient.post('api/auth/register', data);
-      notifSuccess("Register successfully!", `Now you can login with email ${response.email}`)
+      notifSuccess(
+        'Register successfully!',
+        `Now you can login with email ${response.email}`,
+      );
       dispatch(registerSuccess(response));
     } catch (error) {
       dispatch(registerFailure());
@@ -76,9 +79,8 @@ export const authAction = (token) => {
     } catch (error) {
       dispatch(authFailure());
     }
-  }
-}
-
+  };
+};
 
 const authRequesting = () => ({
   type: AUTH_REQUESTING,
@@ -94,7 +96,6 @@ const authFailure = (err) => ({
   err,
 });
 
-
 export const logoutAction = () => {
-  return async (dispatch) => { };
+  return async (dispatch) => {};
 };

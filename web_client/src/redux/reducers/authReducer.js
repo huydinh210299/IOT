@@ -8,19 +8,18 @@ import {
   REGISTER_REQUESTING,
   AUTH_FAILURE,
   AUTH_SUCCESS,
-  AUTH_REQUESTING
+  AUTH_REQUESTING,
 } from '../actions/authAction';
-
 
 const auth = (
   state = {
-    token: null,
+    token: localStorage.getItem('token') || null,
     isAuthenticated: false,
     isRequesting: false,
     errorState: false,
     errorMsg: null,
     isAuthenticating: false,
-    user: {}
+    user: {},
   },
   action,
 ) => {
@@ -57,30 +56,30 @@ const auth = (
         isRequesting: false,
         isAuthenticated: false,
         user: action.data,
-      }
+      };
     case REGISTER_FAILURE:
       return {
         ...state,
         isRequesting: false,
         user: {},
-      }
+      };
     case AUTH_REQUESTING:
       return {
         ...state,
         isAuthenticating: true,
-      }
+      };
     case AUTH_SUCCESS:
       return {
         ...state,
         isAuthenticating: false,
-        isAuthenticated:true,
-      }
+        isAuthenticated: true,
+      };
     case AUTH_FAILURE:
       return {
         ...state,
         isAuthenticating: false,
-        isAuthenticated:false,
-      }
+        isAuthenticated: false,
+      };
     default:
       return state;
   }

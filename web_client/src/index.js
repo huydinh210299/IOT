@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux/reducers/index';
 import { Spin } from 'antd';
 //import appReducer from './redux/reducers/index';
@@ -40,10 +40,13 @@ import thunk from 'redux-thunk';
 
 //     return appReducer(state, action);
 //   };
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk)),
+);
 
 store.subscribe(() => {
-  localStorage.setItem("token", store.getState().authReducer.token);
+  localStorage.setItem('token', store.getState().authReducer.token);
 });
 
 ReactDOM.render(

@@ -104,7 +104,9 @@ const RegistrationForm = () => {
     if (!value) {
       setAutoCompleteResult([]);
     } else {
-      setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
+      setAutoCompleteResult(
+        ['.com', '.org', '.net'].map((domain) => `${value}${domain}`),
+      );
     }
   };
 
@@ -171,7 +173,9 @@ const RegistrationForm = () => {
                 return Promise.resolve();
               }
 
-              return Promise.reject('The two passwords that you entered do not match!');
+              return Promise.reject(
+                'The two passwords that you entered do not match!',
+              );
             },
           }),
         ]}
@@ -189,8 +193,7 @@ const RegistrationForm = () => {
             message: 'Please select your habitual residence!',
           },
         ]}
-      >
-      </Form.Item>
+      ></Form.Item>
 
       <Form.Item
         name="phone"
@@ -220,7 +223,11 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
+        <AutoComplete
+          options={websiteOptions}
+          onChange={onWebsiteChange}
+          placeholder="website"
+        >
           <Input />
         </AutoComplete>
       </Form.Item>
