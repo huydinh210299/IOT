@@ -12,7 +12,6 @@ import rootReducer from './redux/reducers/index';
 import { Spin } from 'antd';
 //import appReducer from './redux/reducers/index';
 import thunk from 'redux-thunk';
-
 // var startState = {};
 // if (
 //     localStorage.getItem("token") !== null &&

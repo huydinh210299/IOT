@@ -72,7 +72,7 @@ const registerFailure = (err) => ({
 export const authAction = (token) => {
   return async (dispatch) => {
     console.log('old token: ', token);
-    //dispatch(authRequesting());
+    dispatch(authRequesting());
     const response = await axiosClient.post('api/auth');
     try {
       dispatch(authSuccess());
@@ -97,5 +97,13 @@ const authFailure = (err) => ({
 });
 
 export const logoutAction = () => {
-  return async (dispatch) => {};
+  return async (dispatch) => {
+    try {
+      dispatch(logoutSuccess());
+    } catch (error) {}
+  };
 };
+
+const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
+});

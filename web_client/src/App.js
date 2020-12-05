@@ -2,7 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
 import PrivateRoute from './components/Shared/PrivateRoute';
 
@@ -15,7 +20,7 @@ import { Spin } from 'antd';
 
 function App() {
   const dispatch = useDispatch();
-
+  //const isAuthenticating = true;
   const { isAuthenticating } = useSelector((state) => state.authReducer);
   useEffect(() => {
     console.log('1');
@@ -27,7 +32,11 @@ function App() {
   return (
     <div style={{ height: '100%' }}>
       {isAuthenticating ? (
-        <Spin size="large" spinning={isAuthenticating}>
+        <Spin
+          size="large"
+          spinning={isAuthenticating}
+          style={{ backgroundColor: '#fff', height: '100%' }}
+        >
           <Router>
             <Switch>
               <Route component={Login} path="/login" />
