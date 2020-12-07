@@ -25,3 +25,8 @@
   cursor: pointer;
   margin-right: 16px;
 }
+
+.ant-menu-item {
+  display: flex;
+  align-items: center;
+}
