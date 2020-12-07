@@ -73,8 +73,8 @@ export const authAction = (token) => {
   return async (dispatch) => {
     console.log('old token: ', token);
     dispatch(authRequesting());
-    const response = await axiosClient.post('api/auth');
     try {
+      const response = await axiosClient.post('api/auth');
       dispatch(authSuccess());
     } catch (error) {
       dispatch(authFailure());

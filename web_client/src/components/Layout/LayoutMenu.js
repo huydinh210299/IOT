@@ -52,6 +52,9 @@ function LayoutMenu(props) {
           <Menu.Item key="2" icon={<DesktopOutlined />}>
             <Link to="/statistic">Statistic</Link>
           </Menu.Item>
+          <Menu.Item key="10" icon={<DesktopOutlined />}>
+            <Link to="/realtime">RealTime</Link>
+          </Menu.Item>
           <SubMenu key="sub1" icon={<UserOutlined />} title="User">
             <Menu.Item key="3">Tom</Menu.Item>
             <Menu.Item key="4">Bill</Menu.Item>

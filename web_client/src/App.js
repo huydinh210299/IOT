@@ -25,25 +25,15 @@ function App() {
   useEffect(() => {
     console.log('1');
     const token = localStorage.getItem('token');
-    if (!!token) {
+    debugger;
+    if (typeof token == 'string' && token != 'null') {
       dispatch(authAction());
     }
   }, []);
   return (
     <div style={{ height: '100%' }}>
       {isAuthenticating ? (
-        <Spin
-          size="large"
-          spinning={isAuthenticating}
-          style={{ backgroundColor: '#fff', height: '100%' }}
-        >
-          <Router>
-            <Switch>
-              <Route component={Login} path="/login" />
-              <PrivateRoute component={MainAppRoutes} path="*" exact />
-            </Switch>
-          </Router>
-        </Spin>
+        <Spin size="large" spinning={isAuthenticating}></Spin>
       ) : (
         <Router>
           <Switch>

@@ -28,24 +28,19 @@ const LoginRegister = (props) => {
   if (isRequesting) {
     console.log('Requesting!');
   }
+
+  // {
+  //   email: 'pasestars@gmail.com',
+  //   password: 'cuongdv172986',
+  // }
   const onFinish = (values) => {
     if (tab == 'Login') {
-      dispatch(
-        loginAction({
-          email: 'pasestars@gmail.com',
-          password: 'cuongdv172986',
-        }),
-      );
+      dispatch(loginAction(values));
     } else {
-      dispatch(
-        registerAction({
-          name: 'quanlh4',
-          email: 'lehaiquantb4@gmail.com',
-          password: 'quan1041999',
-        }),
-      );
+      delete values.confirm;
+      dispatch(registerAction(values));
     }
-    console.log('Input:', values);
+    console.log('Input login - register:', values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed login:', errorInfo);
@@ -120,7 +115,7 @@ const LoginRegister = (props) => {
             {
               type: 'string',
               required: true,
-              message: 'Please enter your name!',
+              message: 'Please enter your name 6 to 30 charaters!',
             },
           ]}
         >
@@ -202,9 +197,7 @@ const LoginRegister = (props) => {
     },
   ];
   if (isAuthenticated === true) {
-    debugger;
     if (history.location.state && history.location.state.from) {
-      debugger;
       history.replace(history.location.state.from);
       return null;
     } else

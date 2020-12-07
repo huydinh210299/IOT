@@ -2,9 +2,42 @@ require('dotenv').config();
 
 const mqtt = require('mqtt');
 const mongoose = require('mongoose');
-
 const Sensor = require('./models/Sensor');
 
+//========================= create server socket local
+const aedes = require('aedes')()
+const httpServer = require('http').createServer()
+const ws = require('websocket-stream')
+const port = 9001
+
+ws.createServer({ server: httpServer }, aedes.handle)
+
+httpServer.listen(port, function () {
+	console.log('websocket local server listening on port ', port)
+});
+
+//==============================client local
+var clientLocal = mqtt.connect({
+	host: 'localhost',
+	protocol: 'ws',
+	port: 9001
+});
+clientLocal.on('connect', function () {
+	clientLocal.subscribe('local', function (err) {
+		// if (!err) {
+		//     setInterval(() => {
+		//         clientLocal.publish('presence', 'Hello mqtt')
+		//     }, 2000);
+		// }
+	})
+	clientLocal.on('message', async function (topic, message) {
+		// message is Buffer
+		const recvFromSocket = JSON.parse(message.toString());
+		console.log('localContent =>', recvFromSocket);
+	})
+})
+
+//========================================================= client mqtt
 //Connect to mongodb database
 mongoose.connect(process.env.DATABASE_URL || 'localhost:27017/iot', {
 	useUnifiedTopology: true,
@@ -17,28 +50,19 @@ var client = mqtt.connect({
 	host: '52.229.154.12',
 });
 
-
-
 client.on('connect', function () {
 	client.subscribe('demo', function (err) {
 		if (!err) {
 			console.log('Subcribing to MQTT Broker!');
 			//test
-			setInterval(() => {
-				client.publish(
-					'demo',
-					"dmoooooo"
-				)
-			}, 2000);
-
-			// 	client.publish(
-			// 		'demo',
-			// 		JSON.stringify({
-			// 			humidityLand: 40,
-			// 			humidityAir: 50,
-			// 			temperature: 25,
-			// 		})
-			// 	);
+			client.publish(
+				'demo',
+				JSON.stringify({
+					humidityLand: 40,
+					humidityAir: 50,
+					temperature: 25,
+				})
+			);
 		}
 	});
 });
@@ -47,13 +71,15 @@ db.once('open', () => {
 	console.log('Connected to Database');
 	client.on('message', async function (topic, message) {
 		//test
-		console.log(`${topic.toString()}=>${message.toString()}`);
+		//console.log(`${topic.toString()}=>${message.toString()}`);
 
 		// message is Buffer
 		let content = JSON.parse(message.toString());
+		clientLocal.publish('local', message.toString());
 		console.log(content);
-		//Create a new Sensor
 
+		//Save to db
+		//Create a new Sensor
 		// const sensor = new Sensor({
 		// 	humidityLand: content.humidityLand,
 		// 	humidityAir: content.humidityAir,
@@ -68,3 +94,16 @@ db.once('open', () => {
 		// }
 	});
 });
+
+
+//dung de test
+setInterval(() => {
+	client.publish(
+		'demo',
+		JSON.stringify({
+			humidityLand: Math.floor(Math.random() * 100),
+			humidityAir: Math.floor(Math.random() * 100),
+			temperature: Math.floor(Math.random() * 100),
+		})
+	);
+}, 2000);
