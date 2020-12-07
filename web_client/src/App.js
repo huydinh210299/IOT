@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
     console.log('1');
     const token = localStorage.getItem('token');
-    debugger;
     if (typeof token == 'string' && token != 'null') {
       dispatch(authAction());
     }
