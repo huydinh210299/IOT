@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon --inspect index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aedes": "^0.44.0",
     "dotenv": "^8.2.0",
     "mongoose": "^5.10.11",
-    "mqtt": "^4.2.4"
+    "mqtt": "^4.2.4",
+    "websocket-stream": "^5.5.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

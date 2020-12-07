@@ -7,10 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux/reducers/index';
+import { Spin } from 'antd';
 //import appReducer from './redux/reducers/index';
 import thunk from 'redux-thunk';
-
 // var startState = {};
 // if (
 //     localStorage.getItem("token") !== null &&
@@ -38,15 +39,18 @@ import thunk from 'redux-thunk';
 
 //     return appReducer(state, action);
 //   };
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk)),
+);
 
-// store.subscribe(() => {
-//     localStorage.setItem("token", store.getState().authReducer.token);
-// });
+store.subscribe(() => {
+  localStorage.setItem('token', store.getState().authReducer.token);
+});
 
 ReactDOM.render(
   <Provider store={store}>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spin tip="Loading..." size="large"></Spin>}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
