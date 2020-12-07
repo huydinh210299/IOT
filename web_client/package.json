@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.2.2",
     "antd": "^4.8.4",
     "axios": "^0.21.0",
+    "jsonwebtoken": "^8.5.1",
     "mqtt": "^4.2.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",

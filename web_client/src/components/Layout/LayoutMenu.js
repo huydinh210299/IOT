@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import './LayoutMenu.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReactComponent as Logo } from '../../assets/images/fashionpng.svg';
-import { Layout, Menu, Breadcrumb, Avatar, Dropdown, Button } from 'antd';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import "./LayoutMenu.css";
+import { useDispatch, useSelector } from "react-redux";
+import { ReactComponent as Logo } from "../../assets/images/fashionpng.svg";
+import { Layout, Menu, Breadcrumb, Avatar, Dropdown, Button } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import { IconMap } from 'antd/lib/result';
-import { Link } from 'react-router-dom';
-import { logoutAction } from '../../redux/actions/authAction';
+} from "@ant-design/icons";
+import { IconMap } from "antd/lib/result";
+import { Link } from "react-router-dom";
+import { logoutAction } from "../../redux/actions/authAction";
+import jwt from "jsonwebtoken";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -31,21 +32,23 @@ function LayoutMenu(props) {
 
   const menu = (
     <Menu>
+      <Menu.Item>{jwt.decode(localStorage.getItem("token")).email}</Menu.Item>
       <Menu.Item onClick={() => dispatch(logoutAction())}>Log out</Menu.Item>
     </Menu>
   );
+  const name = jwt.decode(localStorage.getItem("token")).name;
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         {/* <div className='logo' /> */}
         <div
           className="logo"
-          style={collapsed ? { padding: '4px' } : { padding: '16px' }}
+          style={collapsed ? { padding: "4px" } : { padding: "16px" }}
         >
-          <Logo height={collapsed ? '50px' : '100px'} />
+          <Logo height={collapsed ? "50px" : "100px"} />
         </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<PieChartOutlined />}>
             <Link to="/home">Home</Link>
           </Menu.Item>
@@ -76,17 +79,18 @@ function LayoutMenu(props) {
               <Button shape="circle" icon={<UserOutlined />}></Button>
             </Dropdown>
           </div>
+          <div className="header-name">{name}</div>
         </Header>
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}></Breadcrumb>
+        <Content style={{ margin: "0 16px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}></Breadcrumb>
           <div
             className="site-layout-background"
-            style={{ padding: 24, minHeight: 360, height: '100%' }}
+            style={{ padding: 24, minHeight: 360, height: "100%" }}
           >
             {children}
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>IOT</Footer>
+        <Footer style={{ textAlign: "center" }}>IOT</Footer>
       </Layout>
     </Layout>
   );
