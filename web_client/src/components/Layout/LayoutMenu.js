@@ -15,6 +15,8 @@ import { IconMap } from "antd/lib/result";
 import { Link } from "react-router-dom";
 import { logoutAction } from "../../redux/actions/authAction";
 import jwt from "jsonwebtoken";
+import logo from "../../assets/images/logo.png";
+import logoFull from "../../assets/images/logoFull.png";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -44,9 +46,10 @@ function LayoutMenu(props) {
         {/* <div className='logo' /> */}
         <div
           className="logo"
-          style={collapsed ? { padding: "4px" } : { padding: "16px" }}
+          style={collapsed ? { padding: "4px" } : { padding: "4px" }}
         >
-          <Logo height={collapsed ? "50px" : "100px"} />
+          {/* <Logo height={collapsed ? "50px" : "100px"} /> */}
+          <img src={collapsed ? logo : logoFull} height={"60px"} />
         </div>
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<HomeOutlined />}>
