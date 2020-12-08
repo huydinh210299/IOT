@@ -32,15 +32,17 @@ function App() {
   return (
     <div style={{ height: '100%' }}>
       {isAuthenticating ? (
-        <Spin size="large" spinning={isAuthenticating}></Spin>
+        <div className='_center' style={{ height: '100%' }}>
+          <Spin size="large" spinning={isAuthenticating}></Spin>
+        </div>
       ) : (
-        <Router>
-          <Switch>
-            <Route component={Login} path="/login" />
-            <PrivateRoute component={MainAppRoutes} path="*" exact />
-          </Switch>
-        </Router>
-      )}
+          <Router>
+            <Switch>
+              <Route component={Login} path="/login" />
+              <PrivateRoute component={MainAppRoutes} path="*" exact />
+            </Switch>
+          </Router>
+        )}
     </div>
   );
 }

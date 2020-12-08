@@ -33,7 +33,6 @@ axiosClient.interceptors.response.use(
     return response;
   },
   (error) => {
-    debugger;
     notifFailure(error);
     throw error;
   },

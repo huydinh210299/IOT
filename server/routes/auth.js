@@ -39,7 +39,6 @@ router.post('/register', async (req, res) => {
 
 //Login
 router.post('/login', async (req, res) => {
-    debugger;
     //Validate schema
     const { error } = loginValidation(req.body);
     if (error)
