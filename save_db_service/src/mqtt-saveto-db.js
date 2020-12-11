@@ -1,5 +1,6 @@
 require('dotenv').config();
-
+//IP=168.62.43.5
+//IP2=52.229.154.12
 const mqtt = require('mqtt');
 const mongoose = require('mongoose');
 const Sensor = require('../models/Sensor');
@@ -16,7 +17,8 @@ db.on('error', (error) => console.error(error));
 var clientMqtt = mqtt.connect({
     host: `${process.env.IP}`,
     protocol: 'mqtt',
-    port: 1883
+    port: 1883,
+    clientId:'clientdb'
 });
 
 clientMqtt.on('connect', function () {

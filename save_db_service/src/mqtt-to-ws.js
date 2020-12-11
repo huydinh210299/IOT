@@ -1,6 +1,8 @@
 require('dotenv').config();
+//IP=168.62.43.5
+//IP2=52.229.154.12
 var mqtt = require('mqtt');
-var clientWs = mqtt.connect(`ws://${process.env.IP}:9001`, { clientId: 'clientWs' });
+var clientWs = mqtt.connect(`ws://168.62.43.5:9001`, { clientId: 'clientWs' });
 clientWs.on('connect', function () {
     console.log('connected to broker via ws !');
     clientWs.subscribe('realtimeweb', function (err) {
@@ -24,9 +26,10 @@ clientWs.on('error', (err) => {
 
 //============================================mqtt
 var clientMqtt = mqtt.connect({
-    host: `${process.env.IP}`,
+    host: `168.62.43.5`,
     protocol: 'mqtt',
-    port: 1883
+    port: 1883,
+    clientId:'clientx'
 });
 
 clientMqtt.on('connect', function () {
