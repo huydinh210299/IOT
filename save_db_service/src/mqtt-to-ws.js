@@ -49,9 +49,7 @@ clientMqtt.on('error', (err) => {
     console.log(err.toString());
 });
 
-// clientMqtt.on('disco',()=>{
-//     console.log('error');
-// });
+//test
 setInterval(() => {
     clientMqtt.publish(
         'demo',
