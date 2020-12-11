@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#DCDBDB"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#8BEDEDED"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/info"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#ffff">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imageView"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardCornerRadius="100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/img" />
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="15sp"
+                    android:text="Nguyễn Văn IOT "
+                    android:textColor="@color/cardview_dark_background"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:textSize="15sp"
+                    android:text="ID: 30781"
+                    android:textColor="@color/cardview_dark_background"
+                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <Button
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng xuất"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/t1"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="2dp"
+                android:background="#ffff"
+                android:drawableLeft="@drawable/icon_user"
+                android:drawableRight="@drawable/ne"
+                android:gravity="center|left"
+                android:paddingHorizontal="10dp"
+                android:text=" Quản lý thông tin tài khoản"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/t2"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="2dp"
+                android:background="#ffff"
+                android:drawableLeft="@drawable/notifications"
+                android:drawableRight="@drawable/ne"
+                android:gravity="center|left"
+                android:paddingHorizontal="10dp"
+                android:text=" Cài đặt thông báo  "
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/t3"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="2dp"
+                android:background="#ffff"
+                android:drawableLeft="@drawable/volume"
+                android:drawableRight="@drawable/ne"
+                android:gravity="center|left"
+                android:paddingHorizontal="10dp"
+                android:text=" Cài đặt âm thanh"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="30dp"
+                android:text="Tài khoản và hỗ trợ"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/t4"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="5dp"
+                android:background="#ffff"
+                android:drawableLeft="@drawable/help"
+                android:drawableRight="@drawable/ne"
+                android:gravity="center|left"
+                android:paddingHorizontal="10dp"
+                android:text=" Trợ giúp  "
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/t5"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="2dp"
+                android:background="#ffff"
+                android:drawableLeft="@drawable/ic_baseline_policy_24"
+                android:drawableRight="@drawable/ne"
+                android:gravity="center|left"
+                android:paddingHorizontal="10dp"
+                android:text=" Chính sách dịch vụ"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
