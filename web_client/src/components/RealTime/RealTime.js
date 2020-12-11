@@ -98,15 +98,11 @@ function RealTime(props) {
     const [humidityAir, setHumidityAir] = useState(0);
     const [temperature, setTemperature] = useState(0);
     useEffect(() => {
-        const client = mqtt.connect({
-            host: 'localhost',
-            protocol: 'ws',
-            port: 9001,
-        });
+        const client = mqtt.connect(process.env.REACT_APP_MQTTWS);
         client.on('connect', () => {
             console.log('connecting...');
             setConnectionStatus(true);
-            client.subscribe('local', function (err) {
+            client.subscribe('realtimeweb', function (err) {
                 if (!err) {
                     console.log('Subcribing to MQTT Broker!');
                 }

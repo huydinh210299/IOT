@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { authAction } from './redux/actions/authAction';
 import { Spin } from 'antd';
-
+require('dotenv').config();
 function App() {
   const dispatch = useDispatch();
   //const isAuthenticating = true;
