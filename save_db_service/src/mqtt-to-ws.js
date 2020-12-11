@@ -53,13 +53,13 @@ clientMqtt.on('error', (err) => {
 });
 
 //test
-setInterval(() => {
-    clientMqtt.publish(
-        'demo',
-        JSON.stringify({
-            humidityLand: Math.floor(Math.random() * 100),
-            humidityAir: Math.floor(Math.random() * 100),
-            temperature: Math.floor(Math.random() * 100),
-        })
-    );
-}, 1000);
+// setInterval(() => {
+//     clientMqtt.publish(
+//         'demo',
+//         JSON.stringify({
+//             humidityLand: Math.floor(Math.random() * 100),
+//             humidityAir: Math.floor(Math.random() * 100),
+//             temperature: Math.floor(Math.random() * 100),
+//         })
+//     );
+// }, 1000);
