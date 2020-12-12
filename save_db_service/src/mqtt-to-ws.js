@@ -29,11 +29,11 @@ var clientMqtt = mqtt.connect({
     host: `168.62.43.5`,
     protocol: 'mqtt',
     port: 1883,
-    clientId: 'clientx'
+    clientId: 'clientMqtt'
 });
 
 clientMqtt.on('connect', function () {
-    console.log('connected to mqtt broker');
+    console.log('connected to mqtt broker ithust.xyz');
     clientMqtt.subscribe('demo', function (err) {
         // if (!err) {
         // }
@@ -63,3 +63,30 @@ clientMqtt.on('error', (err) => {
 //         })
 //     );
 // }, 1000);
+
+//============================================mqtt
+var clientMqtt_2 = mqtt.connect({
+    host: `52.229.154.12`,
+    protocol: 'mqtt',
+    port: 1883,
+    clientId: 'clientMqtt_2'
+});
+
+clientMqtt_2.on('connect', function () {
+    console.log('connected to mqtt broker 52.229.154.12');
+    clientMqtt_2.subscribe('demo', function (err) {
+        // if (!err) {
+        // }
+    });
+    clientMqtt_2.on('message', function (topic, message) {
+        // message is Buffer
+        //console.log(message.toString())
+        //content = JSON.parse(message.toString());
+        clientWs.publish('realtimeweb', message.toString());
+    });
+
+})
+clientMqtt_2.on('error', (err) => {
+    console.log('error on clientMqtt_2');
+    console.log(err.toString());
+});

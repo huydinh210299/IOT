@@ -59,14 +59,14 @@ function RealTime(props) {
     ]);
     const [temp, setTemp] = useState(0);
     const [demoId, setDemoId] = useState();
-    //const [client, setClient] = useState(mqtt.connect(process.env.REACT_APP_MQTTWS));
+    const [client, setClient] = useState(mqtt.connect(process.env.REACT_APP_MQTTWS));
     const [connectionStatus, setConnectionStatus] = useState(false);
     const [humidityLand, setHumidityLand] = useState(0);
     const [humidityAir, setHumidityAir] = useState(0);
     const [temperature, setTemperature] = useState(0);
 
     useEffect(() => {
-        const client = mqtt.connect(process.env.REACT_APP_MQTTWS);
+        //const client = mqtt.connect(process.env.REACT_APP_MQTTWS);
         client.on('connect', () => {
             notifSuccess("MQTT", "connected!");
             setConnectionStatus(true);
@@ -104,6 +104,10 @@ function RealTime(props) {
             dataHumidityAir.push({ time: moment().format('mm:ss'), value: parseInt(content.humidityAir) });
             setDataHumidityAir(dataHumidityAir.slice());
         });
+
+        return () => {
+            client.end();
+        }
     }, []);
 
     // function tick() {
@@ -114,7 +118,7 @@ function RealTime(props) {
 
     const onChangeDemo = (checked) => {
         if (checked) {
-            const client = mqtt.connect(process.env.REACT_APP_MQTTWS);
+            //const client = mqtt.connect(process.env.REACT_APP_MQTTWS);
             setDemoId(setInterval(() => {
                 client.publish('realtimeweb', JSON.stringify({
                     humidityLand: Math.floor(Math.random() * 100),
@@ -126,6 +130,7 @@ function RealTime(props) {
         }
         else {
             clearInterval(demoId);
+            //client.end();
         }
     }
 
