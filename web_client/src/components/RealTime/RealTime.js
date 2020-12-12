@@ -9,45 +9,10 @@ import {
 } from '../Shared/Notification';
 import { Line } from '@ant-design/charts';
 import moment from 'moment';
+import { Switch } from 'antd';
+import mqtt from 'mqtt';
 
-var mqtt = require('mqtt');
-
-var newDataHumidityLand = [
-    { time: '00:00', value: 0 },
-    { time: '00:01', value: 1 },
-    { time: '00:02', value: 2 },
-    { time: '00:03', value: 3 },
-    { time: '00:04', value: 4 },
-    { time: '00:05', value: 5 },
-    { time: '00:06', value: 6 },
-    { time: '00:07', value: 7 },
-    { time: '00:08', value: 8 },
-];
-
-var newDataHumidityAir = [
-    { time: '00:00', value: 0 },
-    { time: '00:01', value: 1 },
-    { time: '00:02', value: 2 },
-    { time: '00:03', value: 3 },
-    { time: '00:04', value: 4 },
-    { time: '00:05', value: 5 },
-    { time: '00:06', value: 6 },
-    { time: '00:07', value: 7 },
-    { time: '00:08', value: 8 },
-];
-var newDataTemperature = [
-    { time: '00:00', value: 0 },
-    { time: '00:01', value: 1 },
-    { time: '00:02', value: 2 },
-    { time: '00:03', value: 3 },
-    { time: '00:04', value: 4 },
-    { time: '00:05', value: 5 },
-    { time: '00:06', value: 6 },
-    { time: '00:07', value: 7 },
-    { time: '00:08', value: 8 },
-];
 function RealTime(props) {
-    var a = 1;
     const [dataHumidityLand, setDataHumidityLand] = useState([
         { time: '00:00', value: 0 },
         { time: '00:01', value: 1 },
@@ -93,14 +58,16 @@ function RealTime(props) {
         { time: '00:08', value: 8 },
     ]);
     const [temp, setTemp] = useState(0);
+    const [demoId, setDemoId] = useState();
+    const [client, setClient] = useState(mqtt.connect(process.env.REACT_APP_MQTTWS));
     const [connectionStatus, setConnectionStatus] = useState(false);
     const [humidityLand, setHumidityLand] = useState(0);
     const [humidityAir, setHumidityAir] = useState(0);
     const [temperature, setTemperature] = useState(0);
+
     useEffect(() => {
-        const client = mqtt.connect(process.env.REACT_APP_MQTTWS);
         client.on('connect', () => {
-            console.log('connecting...');
+            notifSuccess("MQTT", "connected!");
             setConnectionStatus(true);
             client.subscribe('realtimeweb', function (err) {
                 if (!err) {
@@ -124,17 +91,17 @@ function RealTime(props) {
             setHumidityLand(parseFloat(content.humidityLand));
             setTemperature(parseFloat(content.temperature));
 
-            newDataHumidityLand.shift();
-            newDataHumidityLand.push({ time: moment().format('mm:ss'), value: parseInt(content.humidityLand) });
-            setDataHumidityLand(newDataHumidityLand.slice());
-            console.log(newDataHumidityLand.slice());
-            newDataTemperature.shift();
-            newDataTemperature.push({ time: moment().format('mm:ss'), value: parseInt(content.temperature) });
-            setDataTemperature(newDataTemperature.slice());
+            dataHumidityLand.shift();
+            dataHumidityLand.push({ time: moment().format('mm:ss'), value: parseInt(content.humidityLand) });
+            setDataHumidityLand(dataHumidityLand.slice());
+            console.log(dataHumidityLand);
+            dataTemperature.shift();
+            dataTemperature.push({ time: moment().format('mm:ss'), value: parseInt(content.temperature) });
+            setDataTemperature(dataTemperature.slice());
 
-            newDataHumidityAir.shift();
-            newDataHumidityAir.push({ time: moment().format('mm:ss'), value: parseInt(content.humidityAir) });
-            setDataHumidityAir(newDataHumidityAir.slice());
+            dataHumidityAir.shift();
+            dataHumidityAir.push({ time: moment().format('mm:ss'), value: parseInt(content.humidityAir) });
+            setDataHumidityAir(dataHumidityAir.slice());
         });
     }, []);
 
@@ -143,6 +110,24 @@ function RealTime(props) {
     //     setTemp(temp);
     //     a=a+1;
     // }
+
+    const onChangeDemo = (checked) => {
+        if (checked) {
+            //client = mqtt.connect(process.env.REACT_APP_MQTTWS)
+            setDemoId(setInterval(() => {
+                client.publish('realtimeweb', JSON.stringify({
+                    humidityLand: Math.floor(Math.random() * 100),
+                    humidityAir: Math.floor(Math.random() * 100),
+                    temperature: Math.floor(Math.random() * 100),
+                })
+                );
+            }, 2000));
+        }
+        else {
+            clearInterval(demoId);
+        }
+    }
+
     return (
         <div>
             <Row gutter={24}>
@@ -179,6 +164,9 @@ function RealTime(props) {
                 <Col span={8} style={{ padding: '10px' }}>
                     <Line {...config} data={dataTemperature} />
                 </Col>
+            </Row>
+            <Row>
+                <Switch defaultChecked={false} checkedChildren="On Demo" unCheckedChildren="Off Demo" onChange={onChangeDemo} disabled={!connectionStatus} />
             </Row>
         </div>
     );

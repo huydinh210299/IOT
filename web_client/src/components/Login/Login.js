@@ -143,8 +143,10 @@ const LoginRegister = (props) => {
           label="Password"
           rules={[
             {
+              type: 'string',
+              min: 8,
               required: true,
-              message: 'Please input your password!',
+              message: 'Must be 8 characters!',
             },
           ]}
           hasFeedback
@@ -236,17 +238,17 @@ const LoginRegister = (props) => {
             </Card>
           </Spin>
         ) : (
-          <Card
-            style={{ minWidth: '400px' }}
-            tabList={tabList}
-            activeTabKey={tab}
-            onTabChange={(key) => {
-              setTab(key);
-            }}
-          >
-            {listContentTabs[tab]}
-          </Card>
-        )}
+            <Card
+              style={{ minWidth: '400px' }}
+              tabList={tabList}
+              activeTabKey={tab}
+              onTabChange={(key) => {
+                setTab(key);
+              }}
+            >
+              {listContentTabs[tab]}
+            </Card>
+          )}
       </div>
     );
 };
