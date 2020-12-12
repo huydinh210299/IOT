@@ -42,8 +42,10 @@ clientMqtt.on('connect', function () {
         // message is Buffer
         //console.log(message.toString())
         //content = JSON.parse(message.toString());
-        console.log("recvfromMQTT => ", message.toString());
-        clientWs.publish('realtimeweb', message.toString());
+        if (topic == 'demo') {
+            console.log("recvfromMQTT => ", message.toString());
+            clientWs.publish('realtimeweb', message.toString());
+        }
     });
 
 })
