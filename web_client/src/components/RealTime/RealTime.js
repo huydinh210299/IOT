@@ -83,7 +83,7 @@ function RealTime(props) {
             notifFailureMes('Mqtt disconnecting...');
         });
         // client.on('close', () => { notifFailureMes("Mqtt disconnected !",) });
-        client.on('message', async function (topic, message) {
+        client.on('message', function (topic, message) {
             // message is Buffer
             let content = JSON.parse(message.toString());
             //console.log(content);

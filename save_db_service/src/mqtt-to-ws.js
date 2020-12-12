@@ -29,7 +29,7 @@ var clientMqtt = mqtt.connect({
     host: `168.62.43.5`,
     protocol: 'mqtt',
     port: 1883,
-    clientId:'clientx'
+    clientId: 'clientx'
 });
 
 clientMqtt.on('connect', function () {
@@ -38,7 +38,7 @@ clientMqtt.on('connect', function () {
         // if (!err) {
         // }
     });
-    clientMqtt.on('message', async function (topic, message) {
+    clientMqtt.on('message', function (topic, message) {
         // message is Buffer
         //console.log(message.toString())
         //content = JSON.parse(message.toString());
