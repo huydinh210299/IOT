@@ -6,6 +6,7 @@
   "scripts": {
     "mqttws": "node ./src/mqtt-to-ws.js",
     "mqttsavedb": "node ./src/mqtt-saveto-db.js",
+    "test": "node ./src/test.js",
     "start": "nodemon --inspect index.js"
   },
   "keywords": [],
