@@ -24,11 +24,21 @@ const { SubMenu } = Menu;
 function LayoutMenu(props) {
   const { children } = props;
   const [collapsed, setCollapsed] = useState(false);
+  const [timeNow, setTimeNow] = useState(new Date());
 
   const onCollapse = (collapsed) => {
     console.log(collapsed);
     setCollapsed(collapsed);
   };
+
+  React.useEffect(() => {
+    const timeId = setInterval(() => {
+      setTimeNow(new Date());
+    }, 1000);
+    return () => { clearInterval(timeId) };
+  }, []);
+
+
 
   const dispatch = useDispatch();
 
@@ -91,7 +101,7 @@ function LayoutMenu(props) {
             {children}
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>IOT</Footer>
+        <Footer style={{ textAlign: "center" }}><h6>Nhóm 22 - {timeNow.toLocaleTimeString()}</h6></Footer>
       </Layout>
     </Layout>
   );

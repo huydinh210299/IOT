@@ -134,7 +134,7 @@ function RealTime(props) {
             console.log(newDataHumidityLand.slice());
             newDataTemperature.shift();
             newDataTemperature.push({ time: moment().format('mm:ss'), value: parseInt(content.temperature) });
-            await setDataTemperature(newDataTemperature.slice());
+            setDataTemperature(newDataTemperature.slice());
 
             newDataHumidityAir.shift();
             newDataHumidityAir.push({ time: moment().format('mm:ss'), value: parseInt(content.humidityAir) });
@@ -155,7 +155,6 @@ function RealTime(props) {
                         <h3>Humidity Land</h3>
                         <Progress
                             type="circle"
-                            format={(percent) => `${percent} *C`}
                             percent={humidityLand}
                         />
                     </div>
@@ -169,7 +168,7 @@ function RealTime(props) {
                 <Col span={8}>
                     <div className="_center">
                         <h3>Temperature</h3>
-                        <Progress type="circle" percent={temperature} />
+                        <Progress type="circle" format={(percent) => `${percent} *C`} percent={temperature} />
                     </div>
                 </Col>
             </Row>

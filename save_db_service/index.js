@@ -80,30 +80,29 @@ db.once('open', () => {
 
 		//Save to db
 		//Create a new Sensor
-		// const sensor = new Sensor({
-		// 	humidityLand: content.humidityLand,
-		// 	humidityAir: content.humidityAir,
-		// 	temperature: content.temperature,
-		// });
-		// try {
-		// 	const savedSensor = await sensor.save();
-		// 	console.log('Saved to db');
-		// 	console.log(savedSensor);
-		// } catch (err) {
-		// 	console.error(err);
-		// }
+		const sensor = new Sensor({
+			humidityLand: content.humidityLand,
+			humidityAir: content.humidityAir,
+			temperature: content.temperature,
+		});
+		try {
+			const savedSensor = await sensor.save();
+			console.log('[Saved DB] =>',savedSensor);
+		} catch (err) {
+			console.error(err);
+		}
 	});
 });
 
 
 //dung de test
-setInterval(() => {
-	client.publish(
-		'demo',
-		JSON.stringify({
-			humidityLand: Math.floor(Math.random() * 100),
-			humidityAir: Math.floor(Math.random() * 100),
-			temperature: Math.floor(Math.random() * 100),
-		})
-	);
-}, 2000);
+// setInterval(() => {
+// 	client.publish(
+// 		'demo',
+// 		JSON.stringify({
+// 			humidityLand: Math.floor(Math.random() * 100),
+// 			humidityAir: Math.floor(Math.random() * 100),
+// 			temperature: Math.floor(Math.random() * 100),
+// 		})
+// 	);
+// }, 2000);
