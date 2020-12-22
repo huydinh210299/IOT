@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView"
+                android:text="Đăng ký"
+                android:textColor="#3F51B5"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt1"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:text="Tên người dùng" />
+
+            <EditText
+                android:id="@+id/txt4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt3"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/txt5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt4"
+                android:layout_marginTop="30dp"
+                android:text="Email" />
+
+
+            <EditText
+                android:id="@+id/txt6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt5" />
+
+            <TextView
+                android:id="@+id/hide1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt6"
+                android:text=""
+                android:textColor="#F44336"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/hide2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hide1"
+                android:textColor="#F44336"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hide2"
+                android:layout_marginTop="30dp"
+                android:text="Mật khẩu" />
+
+
+            <EditText
+                android:id="@+id/txt10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt9"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/hide3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt10"
+                android:text="aa"
+                android:textColor="#F44336"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hide3"
+                android:layout_marginTop="30dp"
+                android:text="Xác nhận mật khẩu" />
+
+            <EditText
+                android:id="@+id/txt12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt11"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/hide4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt12"
+                android:text="X Kiểm tra lại!"
+                android:textColor="#F44336"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hide4"
+                android:layout_marginTop="30dp"
+                android:background="#3F51B5"
+                android:text="Đăng ký"
+                android:textColor="#ffff"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
