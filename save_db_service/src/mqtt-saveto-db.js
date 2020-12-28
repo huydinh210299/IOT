@@ -45,7 +45,7 @@ db.once('open', () => {
         //console.log(`${topic.toString()}=>${message.toString()}`);
 
         // message is Buffer
-        if (topic == 'demo') {
+        if (topic.toString() == 'demo') {
             let content = JSON.parse(message.toString());
             //Save to db
             //Create a new Sensor
