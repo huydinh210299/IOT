@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Space, Button } from "antd";
 import { useHistory } from "react-router-dom";
 
-function Home(props) {
+function ChooseArea(props) {
   const [areas, setareas] = useState([]);
   useEffect(() => {
     let area = [];
@@ -36,6 +36,6 @@ function Home(props) {
   );
 }
 
-Home.propTypes = {};
+ChooseArea.propTypes = {};
 
-export default Home;
+export default ChooseArea;

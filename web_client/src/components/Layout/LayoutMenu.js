@@ -10,6 +10,7 @@ import {
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
+  AreaChartOutlined,
 } from "@ant-design/icons";
 import { IconMap } from "antd/lib/result";
 import { Link } from "react-router-dom";
@@ -35,10 +36,10 @@ function LayoutMenu(props) {
     const timeId = setInterval(() => {
       setTimeNow(new Date());
     }, 1000);
-    return () => { clearInterval(timeId) };
+    return () => {
+      clearInterval(timeId);
+    };
   }, []);
-
-
 
   const dispatch = useDispatch();
 
@@ -65,6 +66,9 @@ function LayoutMenu(props) {
           <Menu.Item key="1" icon={<HomeOutlined />}>
             <Link to="/home">Home</Link>
           </Menu.Item>
+          {/* <Menu.Item key="100" icon={<AreaChartOutlined />}>
+            <Link to="/areas">Area</Link>
+          </Menu.Item> */}
           <Menu.Item key="2" icon={<BarChartOutlined />}>
             <Link to="/statistic">Statistic</Link>
           </Menu.Item>
@@ -101,7 +105,9 @@ function LayoutMenu(props) {
             {children}
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}><h6>Nhóm 22 - {timeNow.toLocaleTimeString()}</h6></Footer>
+        <Footer style={{ textAlign: "center" }}>
+          <h6>Nhóm 22 - {timeNow.toLocaleTimeString()}</h6>
+        </Footer>
       </Layout>
     </Layout>
   );

@@ -13,6 +13,7 @@ import { Card } from 'antd';
 const Home = lazy(() => import('./HomeRoute'));
 const Statistic = lazy(() => import('./StatisticRoute'));
 const RealTime = lazy(() => import('./RealTimeRoute'));
+const ChooseAreaRoute = lazy(() => import('./ChooseAreaRoute'));
 // const Rooms = lazy( () => import("routers/RoomsRoute"));
 // const Deveices = lazy( () => import("routers/DeveicesRoute"));
 // const Profile = lazy( () => import("routers/ProfileRoute"));
@@ -26,6 +27,7 @@ function MainAppRoute(props) {
           <PrivateRoute component={Home} exact path="/home" />
           <PrivateRoute component={Statistic} exact path="/statistic" />
           <PrivateRoute component={RealTime} exact path="/realtime" />
+          <PrivateRoute component={ChooseAreaRoute} exact path="/areas" />
           {/* <PrivateRoute component={Rooms} path="/rooms" />
           <PrivateRoute component={Deveices} path="/deveices" />
           <PrivateRoute component={Profile} path="/profile" />
