@@ -7,7 +7,7 @@ const Sensor = require('../models/Sensor');
 
 //========================================================= client mqtt
 //Connect to mongodb database
-mongoose.connect(process.env.DATABASE_URL || 'localhost:27017/iot', {
+mongoose.connect(`mongodb+srv://iot:iot07@cluster0.8k1wz.mongodb.net/iot?retryWrites=true&w=majority` || 'localhost:27017/iot', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
 });
