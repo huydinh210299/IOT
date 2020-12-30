@@ -2,7 +2,7 @@ require('dotenv').config();
 //IP=168.62.43.5
 //IP2=52.229.154.12
 var mqtt = require('mqtt');
-var clientWs = mqtt.connect(`ws://168.62.43.5:9001`, { clientId: 'clientWs' });
+var clientWs = mqtt.connect(`ws://168.62.43.5:9001`);
 clientWs.on('connect', function () {
     console.log('connected to broker via ws !');
     clientWs.subscribe('realtimeweb', function (err) {
@@ -29,7 +29,6 @@ var clientMqtt = mqtt.connect({
     host: `168.62.43.5`,
     protocol: 'mqtt',
     port: 1883,
-    clientId: 'clientMqtt'
 });
 
 clientMqtt.on('connect', function () {
@@ -42,7 +41,7 @@ clientMqtt.on('connect', function () {
         // message is Buffer
         //console.log(message.toString())
         //content = JSON.parse(message.toString());
-        if (topic == 'demo') {
+        if (topic.toString() == 'demo') {
             console.log("recvfromMQTT => ", message.toString());
             clientWs.publish('realtimeweb', message.toString());
         }
@@ -67,28 +66,27 @@ clientMqtt.on('error', (err) => {
 // }, 1000);
 
 //============================================mqtt
-var clientMqtt_2 = mqtt.connect({
-    host: `52.229.154.12`,
-    protocol: 'mqtt',
-    port: 1883,
-    clientId: 'clientMqtt_2'
-});
+// var clientMqtt_2 = mqtt.connect({
+//     host: `52.229.154.12`,
+//     protocol: 'mqtt',
+//     port: 1883,
+// });
 
-clientMqtt_2.on('connect', function () {
-    console.log('connected to mqtt broker 52.229.154.12');
-    clientMqtt_2.subscribe('demo', function (err) {
-        // if (!err) {
-        // }
-    });
-    clientMqtt_2.on('message', function (topic, message) {
-        // message is Buffer
-        //console.log(message.toString())
-        //content = JSON.parse(message.toString());
-        clientWs.publish('realtimeweb', message.toString());
-    });
+// clientMqtt_2.on('connect', function () {
+//     console.log('connected to mqtt broker 52.229.154.12');
+//     clientMqtt_2.subscribe('demo', function (err) {
+//         // if (!err) {
+//         // }
+//     });
+//     clientMqtt_2.on('message', function (topic, message) {
+//         // message is Buffer
+//         //console.log(message.toString())
+//         //content = JSON.parse(message.toString());
+//         clientWs.publish('realtimeweb', message.toString());
+//     });
 
-})
-clientMqtt_2.on('error', (err) => {
-    console.log('error on clientMqtt_2');
-    console.log(err.toString());
-});
+// })
+// clientMqtt_2.on('error', (err) => {
+//     console.log('error on clientMqtt_2');
+//     console.log(err.toString());
+// });
