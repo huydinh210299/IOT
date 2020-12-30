@@ -67,7 +67,7 @@ function RealTime(props) {
 
     useEffect(() => {
         console.log('effect');
-        const client = mqtt.connect(process.env.REACT_APP_MQTTWS);
+        const client = mqtt.connect(`ws://168.62.43.5:9001`);
         client.on('connect', () => {
             notifSuccess("MQTT", "connected!");
             setConnectionStatus(true);
