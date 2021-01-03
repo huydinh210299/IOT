@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -75,9 +76,9 @@ public class FragmentHome extends Fragment {
 
 //    SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences( getContext());
 //    SharedPreferences.Editor editor =sharedPreferences.edit();
-
+    ProgressBar progressBar;
     ToggleButton toggle1, toggle2;
-    Button button, btnAlarm;
+    Button btnAlarm;
     MqttAndroidClient client;
     TextView textView, textView5, txtNhietdo, txtDat, txtKhongkhi;
     View view;
@@ -89,8 +90,9 @@ public class FragmentHome extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         Date date = new Date();
         long time = date.getTime();
+        long time0 = time-1000*60*60*24;// 20 ngày trươc
         // line chart
-        getSensor("1604177516000", String.valueOf(time));// từ 3-12-2020 -> hiện tại
+        getSensor( String.valueOf(time0), String.valueOf(time));//
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -99,7 +101,7 @@ public class FragmentHome extends Fragment {
 
         anhxa();
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionBar.setTitle("IOT");
+        actionBar.setTitle("Smart Farm");
 
         btnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,13 +151,32 @@ public class FragmentHome extends Fragment {
 
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    Log.d("mqttcall", message.toString() + "callback");
-                    textView.setText(message.toString());
+                    Log.d("mqttcall",  "callback "+topic+message.toString() );
+
+                    textView.setText(message.toString());//test
                     sensorResponse = message.toString();//test
                     JSONObject jsonObject = new JSONObject(sensorResponse);
-                    txtNhietdo.setText(jsonObject.getString("humidityLand"));
-                    txtDat.setText(jsonObject.getString("temperature"));
+                    txtNhietdo.setText(jsonObject.getString("temperature"));
+                    txtDat.setText(jsonObject.getString("humidityLand"));
                     txtKhongkhi.setText(jsonObject.getString("humidityAir"));
+                    //test
+                   // Log.d("test sensor",  "callback test "+topic+message.toString() );
+//                      if(jsonObject.getString("ledStatus").equals("0")){Log.d("testledStatus",  "callback"+topic+message.toString() );
+//                          toggle1.setChecked(true);
+//                      }else toggle1.setChecked(false);
+//                      if(jsonObject.getString("bumpStatus").equals("0")){Log.d("testbumpStatus",  "callback"+topic+message.toString() );
+//                          toggle2.setChecked(true);
+//                      }else toggle2.setChecked(false);
+                    int s1= Integer.parseInt(jsonObject.getString("ledStatus"));
+                    int s2 =Integer.parseInt(jsonObject.getString("bumpStatus"));
+                    if(s1==1){
+                        toggle1.setChecked(false);
+                    }else toggle1.setChecked(true);
+                    if(s2==1){
+                        toggle1.setChecked(false);
+                    }else toggle1.setChecked(true);
+
+
                 }
 
                 @Override
@@ -173,6 +194,7 @@ public class FragmentHome extends Fragment {
                         Log.d("mqtt", "connect onSuccess");
 //                    pub("alo test");
                         Subscribe("demo");
+                        Subscribe("sensor");
                     }
 
                     @Override
@@ -185,15 +207,6 @@ public class FragmentHome extends Fragment {
                 e.printStackTrace();
             }
         }
-        button.setOnClickListener(new View.OnClickListener() {  //test
-            @Override
-            public void onClick(View view) {
-//                Date date= new Date();
-//                long time = date.getTime();
-//                getSensor("1606966800",String.valueOf(time));// từ 3-12-2020 -> hiện tại
-
-            }
-        });
 
         return view;
     }
@@ -238,12 +251,13 @@ public class FragmentHome extends Fragment {
         toggle2 = (ToggleButton) view.findViewById(R.id.btn2);
         textView = view.findViewById(R.id.textView);
         textView5 = view.findViewById(R.id.textView5);
-        button = view.findViewById(R.id.button);
+        //button = view.findViewById(R.id.button);
         txtDat = view.findViewById(R.id.dat);
         txtKhongkhi = view.findViewById(R.id.khongkhi);
         txtNhietdo = view.findViewById(R.id.nhietdo);
         btnAlarm = view.findViewById(R.id.alarm);
         lineChart = view.findViewById(R.id.lineChart);
+        progressBar=view.findViewById(R.id.progressBar);
 
     }
 
@@ -259,7 +273,7 @@ public class FragmentHome extends Fragment {
         RadioButton nuoc = (RadioButton) dialog.findViewById(R.id.nuoc);
         EditText edtTime= dialog.findViewById(R.id.editTextNumber);
         Calendar calendar=Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm");
         time = simpleDateFormat.format(calendar.getTime());
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
@@ -285,13 +299,13 @@ public class FragmentHome extends Fragment {
                    // textView.setText(timeLight);
                     String alarmLight = "{ \"alarm\" : \"" + timeLight +"\",\"time\" : \""+edtTime.getText().toString().trim()+"\"}";
                     pub("alarmLight", alarmLight);
-                } else {
+                }
+                if(nuoc.isChecked()){
                     timePump = time;
                   //  textView5.setText(timePump);
                     String alarmPump = "{ \"alarm\" : \"" + timePump +"\",\"time\" : \""+edtTime.getText().toString().trim()+"\"}";
                     pub("alarmPump", alarmPump);
                 }
-
                 dialog.dismiss();
 
             }
@@ -320,7 +334,7 @@ public class FragmentHome extends Fragment {
         jdf.setTimeZone(TimeZone.getTimeZone("GMT+7"));
         String java_date1 = jdf.format(date1);
         String java_date2 = jdf.format(date2);
-        Log.d("testDate", java_date1);
+ //       Log.d("testDate", java_date1);
 //
 //        String begin,end;
 //        begin="1604177516000";
@@ -337,7 +351,6 @@ public class FragmentHome extends Fragment {
                 ArrayList<Entry> yhumidityAir = new ArrayList<>();
                 ArrayList<Entry> yhumidityLand = new ArrayList<>();
                 ArrayList<Entry> yTemperature = new ArrayList<>();
-
                 for (int i = 0; i < numDataPoints; i++) {
                     yhumidityAir.add(new Entry(i, sensors.get(i).getHumidityAir().intValue()));
                     yhumidityLand.add(new Entry(i, sensors.get(i).getHumidityLand().intValue()));
@@ -373,6 +386,7 @@ public class FragmentHome extends Fragment {
                 description.setText(java_date2);
                 lineChart.setDescription(description);
                 lineChart.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -380,6 +394,7 @@ public class FragmentHome extends Fragment {
                 Log.d("Error: ", t.getMessage());
             }
         });
+
 
     }
 

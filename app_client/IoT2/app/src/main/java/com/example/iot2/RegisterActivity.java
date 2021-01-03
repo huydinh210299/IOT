@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     String html;
     TextView text, hide1, hide2,hide3, hide4;
     EditText txt6Email, txt10Pass,txt12Pass2,textName;
+    ImageView imageView;
     Button btn;
     int check=0;
 
@@ -40,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         txt6Email=findViewById(R.id.txt6);
         txt10Pass=findViewById(R.id.txt10);
         txt12Pass2=findViewById(R.id.txt12);
+        imageView=findViewById(R.id.imageView);
         textName=findViewById(R.id.txt4);
         hide1 = findViewById(R.id.hide1);
         hide2 = findViewById(R.id.hide2);
@@ -55,6 +58,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String pass2 = txt12Pass2.getText().toString().trim();
                 dialog(username,email,pass);
 
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 
