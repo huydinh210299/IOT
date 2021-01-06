@@ -15,7 +15,7 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 
 var clientMqtt = mqtt.connect({
-    host: `168.62.43.5`,
+    host: `iot.ithust.xyz`,
     protocol: 'mqtt',
     port: 1883,
     clientId:'clientdb'

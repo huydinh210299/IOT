@@ -1,5 +1,5 @@
 var mqtt = require('mqtt');
-var clientWs = mqtt.connect(`ws://168.62.43.5:9001`, { clientId: 'clientWs' });
+var clientWs = mqtt.connect(`ws://iot.ithust.xyz:9001`, { clientId: 'clientWs' });
 clientWs.on('connect', function () {
     console.log('connected to broker via ws !');
     clientWs.subscribe('realtimeweb', function (err) {

@@ -1,7 +1,7 @@
 var mqtt = require('mqtt');
 
 var clientMqtt = mqtt.connect({
-    host: `168.62.43.5`,
+    host: `iot.ithust.xyz`,
     protocol: 'mqtt',
     port: 1883,
     clientId: 'clientTest'
@@ -27,13 +27,13 @@ clientMqtt.on('error', (err) => {
 });
 
 //test
-// setInterval(() => {
-//     clientMqtt.publish(
-//         'demo',
-//         JSON.stringify({
-//             humidityLand: Math.floor(Math.random() * 100),
-//             humidityAir: Math.floor(Math.random() * 100),
-//             temperature: Math.floor(Math.random() * 100),
-//         })
-//     );
-// }, 2000);
+setInterval(() => {
+    clientMqtt.publish(
+        'demo',
+        JSON.stringify({
+            humidityLand: Math.floor(Math.random() * 100),
+            humidityAir: Math.floor(Math.random() * 100),
+            temperature: Math.floor(Math.random() * 100),
+        })
+    );
+}, 2000);

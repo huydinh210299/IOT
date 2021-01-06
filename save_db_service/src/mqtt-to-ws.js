@@ -2,7 +2,7 @@ require('dotenv').config();
 //IP=168.62.43.5
 //IP2=52.229.154.12
 var mqtt = require('mqtt');
-var clientWs = mqtt.connect(`ws://168.62.43.5:9001`);
+var clientWs = mqtt.connect(`ws://iot.ithust.xyz:9001`);
 clientWs.on('connect', function () {
     console.log('connected to broker via ws !');
     clientWs.subscribe('realtimeweb', function (err) {
