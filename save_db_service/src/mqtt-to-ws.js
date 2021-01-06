@@ -26,7 +26,7 @@ clientWs.on('error', (err) => {
 
 //============================================mqtt
 var clientMqtt = mqtt.connect({
-    host: `168.62.43.5`,
+    host: `iot.ithust.xyz`,
     protocol: 'mqtt',
     port: 1883,
 });

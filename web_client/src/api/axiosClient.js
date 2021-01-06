@@ -13,7 +13,7 @@ const URL = process.env.REACT_APP_URL_8080;
 const axiosClient = axios.create({
   //timeout: 5000,
   //baseURL: 'http://localhost:4000',
-  baseURL: URL,
+  baseURL: 'http://iot.ithust.xyz:8080/',
   headers: {
     'Content-Type': 'application/json',
   },
