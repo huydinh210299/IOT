@@ -11,6 +11,7 @@ public class ApiClient {
     public static final String BASE_URL = "http:ithust.xyz:8080/api/";
     private static Retrofit retrofit = null;
 
+
     public static ApiInterface getClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

@@ -31,7 +31,7 @@
                 android:id="@+id/nhietdo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="148dp"
+                android:layout_marginStart="140dp"
                 android:text="..."
                 android:textColor="@color/text"
                 android:textSize="18sp"
@@ -82,78 +82,83 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:background="@drawable/custom1"
-                android:padding="5dp"
                 app:layout_constraintStart_toStartOf="@+id/txt3"
                 app:layout_constraintTop_toBottomOf="@+id/txt3">
 
 
-                <ToggleButton
+                <Switch
+                    android:thumbTint="#2196F3"
+                    android:trackTint="#4A5554"
+                    android:switchMinWidth="56dp"
+                    android:text="    Hệ thống ánh sáng"
                     android:id="@+id/btn1"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/toggle_selector"
-                    android:textColor="@color/text"
-                    android:textStyle="bold"
+                    android:checked="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Đèn"
                     android:textColor="@color/text"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/btn1"
+                    app:layout_constraintTop_toBottomOf="@+id/btn1" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="28dp"
-                android:background="@drawable/custom1"
-                android:padding="5dp"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout">
 
-                <ToggleButton
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="5dp"
+                android:id="@+id/constraintLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom1"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <Switch
                     android:id="@+id/btn2"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/toggle_selector"
-                    android:textColor="@color/text"
-                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/pump"
+                    android:switchMinWidth="56dp"
+                    android:text="Hệ thống tưới nước"
+                    android:thumbTint="#2196F3"
+                    android:trackTint="#4A5554"
+                    android:checked="false"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Bơm nước"
                     android:textColor="@color/text"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/btn2"
+                    app:layout_constraintTop_toBottomOf="@+id/btn2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginTop="44dp"
                 android:background="@drawable/custom2"
                 android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/textView12">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart"
@@ -162,11 +167,12 @@
                     android:visibility="gone">
 
                 </com.github.mikephil.charting.charts.LineChart>
+
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:gravity="center"/>
+                    android:gravity="center" />
 
             </RelativeLayout>
 
@@ -178,9 +184,9 @@
                 android:layout_marginTop="16dp"
                 android:text="                      "
                 android:textColor="#FFFFFF"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
-
 
 
             <Button
@@ -189,6 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/custom1"
+                android:drawableLeft="@drawable/alarm"
                 android:text="Hẹn giờ"
                 android:textColor="@color/text"
                 android:textStyle="bold"
@@ -203,10 +210,23 @@
                 android:layout_marginTop="16dp"
                 android:text="                    "
                 android:textColor="#FFFFFF"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:textColor="#F44336"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Biểu đồ trong ngày:"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

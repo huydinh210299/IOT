@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/custom3"
-    android:paddingVertical="25dp"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="25dp">
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:gravity="center"
         android:text="Hẹn giờ"
         android:textColor="@color/a"
@@ -25,8 +24,8 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
@@ -59,7 +58,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="48dp"
         android:text="Xác nhận"
         android:textColor="@color/a"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,10 +68,11 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
         android:text="Hủy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <EditText
         android:id="@+id/editTextNumber"
@@ -93,12 +93,73 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
+        android:layout_marginRight="5dp"
         android:gravity="center"
         android:text="s"
-        android:layout_marginRight="5dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextNumber"
         app:layout_constraintTop_toTopOf="@+id/editTextNumber" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Hệ thống ánh sáng:"
+        android:textColor="#F42E20"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="- Hệ thống tưới nước:"
+        android:textColor="#F42E20"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:drawableLeft="@drawable/alarm2"
+        android:text="12:50"
+        android:textColor="#F42E20"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/alarm2"
+        android:text="12:24"
+        android:textColor="#F42E20"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+    <TextView
+        android:drawableLeft="@drawable/alarm20"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawableLeft="@drawable/alarm20"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

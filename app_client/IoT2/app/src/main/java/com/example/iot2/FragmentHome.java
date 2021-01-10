@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -77,31 +78,34 @@ public class FragmentHome extends Fragment {
 //    SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences( getContext());
 //    SharedPreferences.Editor editor =sharedPreferences.edit();
     ProgressBar progressBar;
-    ToggleButton toggle1, toggle2;
+    Switch switch1, switch2;
     Button btnAlarm;
     MqttAndroidClient client;
     TextView textView, textView5, txtNhietdo, txtDat, txtKhongkhi;
     View view;
     String sensorResponse;
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        editor = sharedPreferences.edit();
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle("Area "+sharedPreferences.getString("area",""));
+
+
         Date date = new Date();
         long time = date.getTime();
-        long time0 = time-1000*60*60*24;// 20 ngày trươc
+        long time0 = time-1000*60*60*24*7;// 20 ngày trươc
         // line chart
         getSensor( String.valueOf(time0), String.valueOf(time));//
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         Log.d("token Main", sharedPreferences.getString("token", ""));
         token = sharedPreferences.getString("token", "");
 
         anhxa();
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionBar.setTitle("Smart Farm");
 
         btnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +115,7 @@ public class FragmentHome extends Fragment {
         });
 
         //  toggle
-        toggle1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     //  Toast.makeText(getActivity(),"on",Toast.LENGTH_SHORT).show();
@@ -122,7 +126,7 @@ public class FragmentHome extends Fragment {
                 }
             }
         });
-        toggle2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     //  Toast.makeText(getActivity(),"on",Toast.LENGTH_SHORT).show();
@@ -140,7 +144,7 @@ public class FragmentHome extends Fragment {
             options.setUserName("esp8266");
             options.setPassword("123456".toCharArray());
             String clientId = MqttClient.generateClientId();
-            client = new MqttAndroidClient(getActivity().getApplicationContext(), "tcp://168.62.43.5:1883",
+            client = new MqttAndroidClient(getActivity().getApplicationContext(), "tcp://13.90.147.94:1883",
                     clientId);
 
             client.setCallback(new MqttCallback() {
@@ -170,11 +174,11 @@ public class FragmentHome extends Fragment {
                     int s1= Integer.parseInt(jsonObject.getString("ledStatus"));
                     int s2 =Integer.parseInt(jsonObject.getString("bumpStatus"));
                     if(s1==1){
-                        toggle1.setChecked(false);
-                    }else toggle1.setChecked(true);
+                        switch1.setChecked(false);
+                    }else switch1.setChecked(true);
                     if(s2==1){
-                        toggle1.setChecked(false);
-                    }else toggle1.setChecked(true);
+                        switch1.setChecked(false);
+                    }else switch1.setChecked(true);
 
 
                 }
@@ -247,8 +251,8 @@ public class FragmentHome extends Fragment {
     }
 
     public void anhxa() {
-        toggle1 = (ToggleButton) view.findViewById(R.id.btn1);
-        toggle2 = (ToggleButton) view.findViewById(R.id.btn2);
+        switch1 = view.findViewById(R.id.btn1);
+        switch2 = view.findViewById(R.id.btn2);
         textView = view.findViewById(R.id.textView);
         textView5 = view.findViewById(R.id.textView5);
         //button = view.findViewById(R.id.button);
@@ -267,6 +271,12 @@ public class FragmentHome extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button btnHuy = (Button) dialog.findViewById(R.id.button3);
         Button btnXacNhan = (Button) dialog.findViewById(R.id.button2);
+        TextView txtLightAlarm = dialog.findViewById(R.id.textView14);
+        TextView txtPumpAlarm = dialog.findViewById(R.id.textView13);
+        TextView txtTimeLight= dialog.findViewById(R.id.textView15);
+        TextView txtTimePump= dialog.findViewById(R.id.textView16);
+        String timeLightAlarm, timePumpAlarm,tAlarm;
+
         TimePicker timePicker = (TimePicker) dialog.findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
         RadioButton den = (RadioButton) dialog.findViewById(R.id.den);
@@ -275,6 +285,10 @@ public class FragmentHome extends Fragment {
         Calendar calendar=Calendar.getInstance();
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm");
         time = simpleDateFormat.format(calendar.getTime());
+        txtLightAlarm.setText(sharedPreferences.getString("alarmLight",""));
+        txtPumpAlarm.setText(sharedPreferences.getString("alarmPump",""));
+        txtTimeLight.setText(sharedPreferences.getString("timeLight",""));
+        txtTimePump.setText(sharedPreferences.getString("timePump",""));
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker timePicker, int hour, int min) {
@@ -298,13 +312,22 @@ public class FragmentHome extends Fragment {
                     timeLight = time;
                    // textView.setText(timeLight);
                     String alarmLight = "{ \"alarm\" : \"" + timeLight +"\",\"time\" : \""+edtTime.getText().toString().trim()+"\"}";
+                   // editor = sharedPreferences.edit();
+                    editor.putString("alarmLight", time);
+                    editor.putString("timeLight",edtTime.getText().toString().trim());
+                    editor.commit();
                     pub("alarmLight", alarmLight);
+                    txtLightAlarm.setText("- Hệ thống đèn: "+ sharedPreferences.getString("alarmLight",""));
                 }
                 if(nuoc.isChecked()){
                     timePump = time;
                   //  textView5.setText(timePump);
                     String alarmPump = "{ \"alarm\" : \"" + timePump +"\",\"time\" : \""+edtTime.getText().toString().trim()+"\"}";
+                    editor.putString("alarmPump", time);
+                    editor.putString("timePump",edtTime.getText().toString().trim());
+                    editor.commit();
                     pub("alarmPump", alarmPump);
+                    txtPumpAlarm.setText("- Hệ thông tưới nước: "+ sharedPreferences.getString("alarmPump",""));
                 }
                 dialog.dismiss();
 

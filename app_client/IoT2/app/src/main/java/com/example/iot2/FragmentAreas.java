@@ -1,6 +1,8 @@
 package com.example.iot2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,8 @@ public class FragmentAreas extends Fragment {
         view = inflater.inflate(R.layout.fragment_areas, container, false);
         ActionBar actionBar =((AppCompatActivity)getActivity()).getSupportActionBar();
         actionBar.setTitle("Area");
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         gridView= view.findViewById(R.id.gridView);
         areas =new ArrayList<>();
         for (int i=1;i<=20;i++){
@@ -43,12 +47,11 @@ public class FragmentAreas extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                editor.putString("area",String.valueOf(i+1) );
+                editor.commit();
                 MainActivity.bottomNavigationView.setSelectedItemId(R.id.nav_2);
             }
         });
-
-
-
 
 
         return view;
