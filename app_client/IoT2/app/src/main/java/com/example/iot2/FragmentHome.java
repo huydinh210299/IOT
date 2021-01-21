@@ -98,7 +98,7 @@ public class FragmentHome extends Fragment {
 
         Date date = new Date();
         long time = date.getTime();
-        long time0 = time-1000*60*60*24*7;// 20 ngày trươc
+        long time0 = time-1000*60*60*24 ;// 20 ngày trươc
         // line chart
         getSensor( String.valueOf(time0), String.valueOf(time));//
 
@@ -156,31 +156,11 @@ public class FragmentHome extends Fragment {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     Log.d("mqttcall",  "callback "+topic+message.toString() );
-
                     textView.setText(message.toString());//test
-                    sensorResponse = message.toString();//test
-                    JSONObject jsonObject = new JSONObject(sensorResponse);
+                    JSONObject jsonObject = new JSONObject(message.toString());
                     txtNhietdo.setText(jsonObject.getString("temperature"));
                     txtDat.setText(jsonObject.getString("humidityLand"));
                     txtKhongkhi.setText(jsonObject.getString("humidityAir"));
-                    //test
-                   // Log.d("test sensor",  "callback test "+topic+message.toString() );
-//                      if(jsonObject.getString("ledStatus").equals("0")){Log.d("testledStatus",  "callback"+topic+message.toString() );
-//                          toggle1.setChecked(true);
-//                      }else toggle1.setChecked(false);
-//                      if(jsonObject.getString("bumpStatus").equals("0")){Log.d("testbumpStatus",  "callback"+topic+message.toString() );
-//                          toggle2.setChecked(true);
-//                      }else toggle2.setChecked(false);
-                    int s1= Integer.parseInt(jsonObject.getString("ledStatus"));
-                    int s2 =Integer.parseInt(jsonObject.getString("bumpStatus"));
-                    if(s1==1){
-                        switch1.setChecked(false);
-                    }else switch1.setChecked(true);
-                    if(s2==1){
-                        switch1.setChecked(false);
-                    }else switch1.setChecked(true);
-
-
                 }
 
                 @Override
@@ -196,9 +176,8 @@ public class FragmentHome extends Fragment {
                     public void onSuccess(IMqttToken asyncActionToken) {
                         // We are connected
                         Log.d("mqtt", "connect onSuccess");
-//                    pub("alo test");
                         Subscribe("demo");
-                        Subscribe("sensor");
+                      //  Subscribe("sensor");
                     }
 
                     @Override

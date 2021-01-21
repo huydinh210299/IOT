@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = txt6Email.getText().toString().trim();
                 String pass = txt10Pass.getText().toString().trim();
                 String pass2 = txt12Pass2.getText().toString().trim();
-                dialog(username,email,pass);
+                register(username,email,pass);
 
             }
         });
@@ -88,8 +88,21 @@ public class RegisterActivity extends AppCompatActivity {
         responseCall.enqueue(new Callback<registerResponse>() {
             @Override
             public void onResponse(Call<registerResponse> call, Response<registerResponse> response) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+                if (response.isSuccessful()) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(RegisterActivity.this);
+                    alertDialog.setTitle("Thông báo");
+                    alertDialog.setMessage("Bạn đã đăng kí thành công! \nHãy đăng nhập để tiếp tục.");
+                    alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    alertDialog.show();
+                }else
+                    Toast.makeText(RegisterActivity.this, "Kiểm tra lại thông tin", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

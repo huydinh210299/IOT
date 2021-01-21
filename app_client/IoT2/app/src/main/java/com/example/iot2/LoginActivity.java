@@ -1,7 +1,9 @@
 package com.example.iot2;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,10 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     String email, pass;
     public loginResponse loginResponse;
     String messagesToken;
-
+    AlertDialog dialog;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +44,16 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         //    sharedPreferences =getSharedPreferences("dataToken",MODE_PRIVATE);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 email = txtemail.getText().toString().trim();
                 pass = txtpass.getText().toString().trim();
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            startActivity(intent);
+                dialog = new AlertDialog.Builder(LoginActivity.this).create();
+                dialog.setTitle("Loading...");
+                dialog.setMessage("  ");
+                dialog.show();
                 login();
             }
         });
@@ -81,9 +84,11 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    dialog.dismiss();
                 } else {
-                    //String messagesToken = loginResponse.getAccessToken();
+                    dialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Kiểm tra lại thông tin", Toast.LENGTH_SHORT).show();
+
 
                 }
             }

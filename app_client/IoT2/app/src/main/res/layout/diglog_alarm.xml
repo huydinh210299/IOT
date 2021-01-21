@@ -58,7 +58,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="25dp"
         android:text="Xác nhận"
         android:textColor="@color/a"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +68,8 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="26dp"
         android:text="Hủy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -84,7 +84,7 @@
         android:gravity="center"
         android:inputType="number"
         android:paddingRight="15dp"
-        android:text="300"
+        android:text="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintTop_toTopOf="@+id/radioGroup" />
